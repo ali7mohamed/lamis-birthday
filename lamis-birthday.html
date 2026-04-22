@@ -43,7 +43,7 @@
   /* ===== INTRO SCREEN ===== */
   #introScreen {
     position: fixed; inset: 0;
-    background: #6b3a4a;
+    background: #0d0508;
     display: flex; justify-content: center; align-items: center;
     z-index: 10001;
     transition: opacity 1.5s ease;
@@ -68,7 +68,7 @@
   /* ===== SURPRISE MESSAGE AFTER PASSWORD ===== */
   #surpriseScreen {
     position: fixed; inset: 0;
-    background: #6b3a4a;
+    background: #0d0508;
     display: none;
     justify-content: center; align-items: center;
     z-index: 9998;
@@ -419,6 +419,225 @@
   ::-webkit-scrollbar-track { background: #1a0810; }
   ::-webkit-scrollbar-thumb { background: var(--deep-rose); border-radius: 10px; }
 
+  /* ===== BASKETBALL SECTION ===== */
+  #basketballSection {
+    padding: 80px 20px;
+    background: linear-gradient(160deg, #0d0d0d 0%, #1a0a0a 100%);
+    display: flex; flex-direction: column; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  #basketballSection .section-title { color: #ff8c42; }
+  #basketballSection .section-title::after { background: linear-gradient(90deg, transparent, #ff6a00, transparent); }
+  #basketballSection .bk-subtitle {
+    color: rgba(255,200,150,0.5); font-size: 0.9rem;
+    margin-bottom: 40px; margin-top: -30px; text-align: center;
+  }
+  #bk-court {
+    position: relative;
+    width: min(380px, 95vw);
+    height: min(560px, 88vh);
+    background: linear-gradient(180deg,#111 0%,#0a0a0a 100%);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+  }
+  .bk-court-arc {
+    position: absolute; bottom: 28%; left: 50%;
+    transform: translateX(-50%);
+    width: 75%; height: 100px;
+    border: 1px solid rgba(255,140,0,0.07);
+    border-bottom: none; border-radius: 100px 100px 0 0;
+  }
+  #bk-hoopArea {
+    position: absolute; top: 10%; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .bk-backboard {
+    width: 88px; height: 58px;
+    border: 2px solid rgba(255,255,255,0.13);
+    border-radius: 3px;
+    background: rgba(255,255,255,0.02);
+    position: relative;
+  }
+  .bk-backboard-inner {
+    position: absolute; bottom: 7px; left: 50%;
+    transform: translateX(-50%);
+    width: 40px; height: 26px;
+    border: 1.5px solid rgba(255,80,0,0.3);
+    border-radius: 2px;
+  }
+  .bk-pole { width: 3px; height: 20px; background: rgba(255,255,255,0.12); margin: 0 auto; }
+  .bk-hoop {
+    width: 62px; height: 10px;
+    border: 3.5px solid #ff6a00;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: 0 0 12px rgba(255,106,0,0.5), 0 0 28px rgba(255,106,0,0.12);
+  }
+  .bk-net {
+    width: 56px; height: 34px;
+    margin: 0 auto; overflow: hidden;
+  }
+  .bk-net::before {
+    content: '';
+    display: block; width: 100%; height: 100%;
+    background:
+      repeating-linear-gradient(to bottom,transparent 0,transparent 7px,rgba(255,255,255,0.17) 7px,rgba(255,255,255,0.17) 8px),
+      repeating-linear-gradient(to right,transparent 0,transparent 8px,rgba(255,255,255,0.1) 8px,rgba(255,255,255,0.1) 9px);
+    clip-path: polygon(6% 0%,94% 0%,80% 100%,20% 100%);
+  }
+  @keyframes bkNetSwing { 0%,100%{transform:scaleX(1) scaleY(1);}45%{transform:scaleX(0.87) scaleY(1.1);} }
+  .bk-net-go { animation: bkNetSwing 0.4s ease; }
+  #bk-scoreArea {
+    position: absolute; top: 14px; left: 12px; right: 12px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .bk-pill {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px; padding: 5px 14px;
+    font-size: 0.72rem; color: rgba(255,255,255,0.45);
+  }
+  .bk-pill b { font-family: 'Amiri',serif; font-size: 1.1rem; color: #ff8c42; margin-left: 3px; }
+  .bk-dots { display: flex; gap: 6px; }
+  .bk-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.13);
+    transition: all 0.3s;
+  }
+  .bk-dot.ok  { background: #ff6a00; border-color: #ff8c42; box-shadow: 0 0 7px rgba(255,106,0,0.6); }
+  .bk-dot.no  { background: rgba(255,50,50,0.3); border-color: rgba(255,80,80,0.35); }
+  #bk-track {
+    position: absolute; bottom: 31%; left: 8%; right: 8%;
+    height: 2px; background: rgba(255,255,255,0.04); border-radius: 4px;
+  }
+  #bk-arrow {
+    position: absolute; bottom: calc(31% - 13px);
+    font-size: 1.4rem; line-height: 1;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 0 8px rgba(255,210,0,0.9));
+    will-change: left;
+  }
+  #bk-ball {
+    position: absolute; bottom: 20%; left: 50%;
+    transform: translateX(-50%);
+    width: 46px; height: 46px;
+    background: radial-gradient(circle at 34% 32%,#ffaa55,#e05500,#7a2200);
+    border-radius: 50%;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6), inset 0 -3px 6px rgba(0,0,0,0.3);
+    z-index: 10;
+  }
+  #bk-ball::before {
+    content: ''; position: absolute; inset: 0; border-radius: 50%;
+    background:
+      linear-gradient(90deg,transparent 46%,rgba(0,0,0,0.32) 47%,rgba(0,0,0,0.32) 53%,transparent 54%),
+      linear-gradient(0deg,transparent 46%,rgba(0,0,0,0.22) 47%,rgba(0,0,0,0.22) 53%,transparent 54%);
+  }
+  #bk-ball::after {
+    content: ''; position: absolute; top: 6px; left: 7px;
+    width: 28px; height: 30px;
+    border: 1.5px solid rgba(0,0,0,0.18);
+    border-radius: 50%; transform: rotate(-25deg);
+  }
+  #bk-pwrap {
+    position: absolute; bottom: 19%; right: 7%;
+    width: 7px; height: 75px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 6px; border: 1px solid rgba(255,255,255,0.07);
+    overflow: hidden;
+  }
+  #bk-pbar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(180deg,#ff3333,#ff8800,#44cc44);
+    border-radius: 6px; transition: height 0.04s;
+  }
+  #bk-btn {
+    position: absolute; bottom: 4%; left: 50%;
+    transform: translateX(-50%);
+    width: 78px; height: 78px; border-radius: 50%;
+    background: linear-gradient(145deg,#ff6a00,#cc4400);
+    border: none; color: white; font-size: 2rem;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(255,106,0,0.4);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.1s, box-shadow 0.1s;
+    z-index: 20;
+  }
+  #bk-btn:active { transform: translateX(-50%) scale(0.9); }
+  #bk-btn.bk-pulse { animation: bkPulse 1.4s ease-in-out infinite; }
+  @keyframes bkPulse {
+    0%,100%{box-shadow:0 8px 25px rgba(255,106,0,0.4),0 0 0 0 rgba(255,106,0,0.35);}
+    55%{box-shadow:0 8px 25px rgba(255,106,0,0.4),0 0 0 14px rgba(255,106,0,0);}
+  }
+  #bk-hint {
+    position: absolute; bottom: 16%; left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.68rem; color: rgba(255,255,255,0.18);
+    white-space: nowrap; letter-spacing: 0.4px;
+    transition: opacity 0.4s;
+  }
+  .bk-ft {
+    position: absolute; font-family: 'Amiri',serif;
+    font-size: 1.35rem; font-weight: bold;
+    pointer-events: none; z-index: 50;
+    white-space: nowrap; transform: translateX(-50%);
+    animation: bkFtUp 1.1s ease forwards;
+  }
+  @keyframes bkFtUp {
+    0%{opacity:1;transform:translate(-50%,0) scale(1);}
+    100%{opacity:0;transform:translate(-50%,-65px) scale(1.15);}
+  }
+  #bk-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.95);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 100; opacity: 0; pointer-events: none;
+    transition: opacity 0.6s;
+    border-radius: 20px;
+  }
+  #bk-overlay.on { opacity: 1; pointer-events: all; }
+  .bk-rcard {
+    text-align: center; padding: 40px 30px; max-width: 330px;
+    transform: scale(0.85);
+    transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  #bk-overlay.on .bk-rcard { transform: scale(1); }
+  .bk-remoji { font-size: 4rem; display: block; margin-bottom: 12px; animation: bkBounce 1s ease-in-out infinite; }
+  @keyframes bkBounce { 0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);} }
+  .bk-rscore { font-family: 'Amiri',serif; font-size: 1.2rem; color: #ff8c42; display: block; margin-bottom: 18px; }
+  .bk-rmsg { font-family: 'Amiri',serif; font-size: 1.15rem; color: rgba(255,255,255,0.83); line-height: 2; margin-bottom: 28px; }
+  .bk-rbtn {
+    background: linear-gradient(135deg,#ff6a00,#cc4400);
+    border: none; border-radius: 50px;
+    padding: 13px 32px; color: white;
+    font-family: 'Tajawal',sans-serif; font-size: 0.9rem;
+    cursor: pointer; box-shadow: 0 8px 22px rgba(255,106,0,0.3);
+  }
+  .bk-rbtn:active { transform: scale(0.95); }
+  .bk-cf {
+    position: absolute; pointer-events: none; z-index: 200;
+    animation: bkCffall linear forwards;
+  }
+  @keyframes bkCffall {
+    0%{opacity:1;transform:translateY(0) rotate(0deg);}
+    100%{opacity:0;transform:translateY(600px) rotate(540deg);}
+  }
+  @keyframes bkShk {
+    0%,100%{transform:translateX(0);}
+    25%{transform:translateX(-7px);}
+    75%{transform:translateX(7px);}
+  }
+  .bk-shk { animation: bkShk 0.35s ease; }
+  .bk-bg-glow {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 30%, rgba(255,100,0,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
   @media (max-width: 600px) {
     .lock-card { padding: 40px 25px; }
     .msg-name { font-size: 2rem; }
@@ -454,7 +673,7 @@
     <p class="lock-subtitle">دخلي الباسورد عشان تكملي</p>
     <input type="password" class="lock-input" id="lockInput" placeholder="• • • • • • •" maxlength="7">
     <button class="lock-btn" onclick="checkPassword()">ادخلي 🤍</button>
-    <p class="lock-error" id="lockError">الباسورد مش صح، حاولي تاني يعني 💔</p>
+    <p class="lock-error" id="lockError"> مش صح، النهارده عيد ميلادك يبقى ايه مش عايز غباء بقى 💔</p>
   </div>
 </div>
 
@@ -481,7 +700,7 @@
   <!-- HANDWRITING -->
   <section id="handwriting">
     <div class="hw-container">
-      <h2 class="hw-title fade-in">✍️ كتبتهالك بإيدي</h2>
+      <h2 class="hw-title fade-in">✍️ </h2>
       <div class="hw-paper fade-in">
         <div class="hw-text" id="hwText"><span class="hw-cursor-blink" id="hwCursor"></span></div>
       </div>
@@ -528,8 +747,8 @@
 
   <!-- HIDDEN MESSAGES -->
   <section id="hiddenMessages">
-    <h2 class="section-title fade-in">رسائل مخفية ✨</h2>
-    <p class="hidden-subtitle fade-in">اضغطي على أي نجمة أو قلب تلاقي مفاجأة 🤫</p>
+    <h2 class="section-title fade-in">مخبيلك شوية حاجات كده  ✨</h2>
+    <p class="hidden-subtitle fade-in">دوسي على أي نجمة أو قلب تلاقي مفاجأة 🤫</p>
     <div class="stars-field fade-in" id="starsField"></div>
   </section>
 
@@ -562,6 +781,41 @@
     </div>
   </section>
 
+  <!-- BASKETBALL -->
+  <section id="basketballSection">
+    <div class="bk-bg-glow"></div>
+    <h2 class="section-title fade-in">🏀 خليني أشوف مهاراتك</h2>
+    <p class="bk-subtitle fade-in">دوسي في الوقت الصح عشان تحطي الكورة 🎯</p>
+    <div id="bk-court">
+      <div class="bk-court-arc"></div>
+      <div id="bk-hoopArea">
+        <div class="bk-backboard"><div class="bk-backboard-inner"></div></div>
+        <div class="bk-pole"></div>
+        <div class="bk-hoop" id="bk-hoop"></div>
+        <div class="bk-net" id="bk-net"></div>
+      </div>
+      <div id="bk-scoreArea">
+        <div class="bk-pill"><b id="bk-snum">0</b>نقاط</div>
+        <div class="bk-dots" id="bk-dots"></div>
+        <div class="bk-pill"><b id="bk-aleft">5</b>محاولات</div>
+      </div>
+      <div id="bk-track"></div>
+      <div id="bk-arrow">▲</div>
+      <div id="bk-ball"></div>
+      <div id="bk-pwrap"><div id="bk-pbar"></div></div>
+      <div id="bk-hint">دوسي عشان ترمي 🏀</div>
+      <button id="bk-btn" class="bk-pulse">🏀</button>
+      <div id="bk-overlay">
+        <div class="bk-rcard">
+          <span class="bk-remoji" id="bk-remoji"></span>
+          <span class="bk-rscore" id="bk-rscore"></span>
+          <p class="bk-rmsg" id="bk-rmsg"></p>
+          <button class="bk-rbtn" onclick="bkReset()">تاني 🔄</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- REASONS -->
   <section id="reasons">
     <h2 class="section-title fade-in">ليه بحبك 🤍</h2>
@@ -579,8 +833,8 @@
     <h2 class="section-title fade-in">🎵 موسيقى</h2>
     <div class="music-player fade-in">
       <div class="music-note">🎶</div>
-      <p class="music-title" id="musicTitle">صدفة</p>
-      <p class="music-artist" id="musicArtist">عبد الحليم حافظ</p>
+      <p class="music-title" id="musicTitle">اسم الأغنية</p>
+      <p class="music-artist" id="musicArtist">اسم المطرب</p>
       <div class="progress-bar" onclick="seekAudio(event)"><div class="progress-fill" id="progressFill"></div></div>
       <p class="music-time" id="musicTime">0:00 / 0:00</p>
       <div class="music-controls">
@@ -687,10 +941,14 @@ function checkPassword() {
           setTimeout(() => {
             if (tracks.length > 0) {
               audio.src = tracks[currentTrack];
-              // autoplay attempt
-              audio.play().catch(() => {});
-              isPlaying = true;
-              document.getElementById('playBtn').textContent = '⏸';
+              document.getElementById('musicTitle').textContent = trackTitles[currentTrack];
+              document.getElementById('musicArtist').textContent = trackArtists[currentTrack];
+              if (AUTOPLAY) {
+                audio.play().then(() => {
+                  isPlaying = true;
+                  document.getElementById('playBtn').textContent = '⏸';
+                }).catch(() => { isPlaying = false; });
+              }
             }
           }, 2000);
         }, 1000);
@@ -967,12 +1225,57 @@ document.getElementById('hiddenPopup').addEventListener('click', function(e) {
   if (e.target === this) closePopup();
 });
 
-// ===== MUSIC =====
+// ╔══════════════════════════════════════════════════════════════╗
+// ║                  🎵 قسم الموسيقى                           ║
+// ║   كل اللي محتاج تعدله موجود هنا بالظبط                    ║
+// ╚══════════════════════════════════════════════════════════════╝
+
 const audio = document.getElementById('audioPlayer');
-const tracks = ['صدفة.mp3', 'الهوا هوايا.mp3'];
-const trackTitles = ['صدفة', 'الهوا هوايا'];
-const trackArtists = ['عبد الحليم حافظ', 'عبد الحليم حافظ'];
-let currentTrack = 0, isPlaying = false;
+
+// ---------------------------------------------------------------
+// 1️⃣  قائمة الأغاني
+//     - tracks       : اسم ملف الأغنية (لازم يكون في نفس مجلد index.html)
+//     - trackTitles  : الاسم اللي هيظهر في البلاير
+//     - trackArtists : اسم المطرب اللي هيظهر تحت
+//
+//     عايز تضيف أغنية؟  ← زود سطر في الثلاثة arrays بنفس الترتيب
+//     عايز تحذف أغنية؟  ← احذف السطر من الثلاثة
+// ---------------------------------------------------------------
+const tracks = [
+  'Elly Msabbarny.mp3',   // ← غير ده لاسم الملف الحقيقي
+  'صدفة.mp3',
+  , 'الهوا هوايا.mp3' 
+  , 'الليل وسماه ونجومه وقمره.mp3'  // ← غير ده أو احذفه لو مش عايزه
+];
+const trackTitles = [
+  'Elly Msabbarny',   // ← الاسم اللي هيظهر
+  'صدفة',
+  'الهوا هوايا', 
+  'لليل وسماه', // ← الاسم اللي هيظهر
+];
+const trackArtists = [
+  'احمد فهمي',   // ← اسم المطرب
+  'عبدالحليم',
+  'عبدالحليم',
+  'ام كلثوم',  // ← اسم المطرب
+];
+
+// ---------------------------------------------------------------
+// 2️⃣  أنهي أغنية تشتغل الأول؟
+//     0 = الأغنية الأولى في القايمة فوق
+//     1 = الأغنية التانية
+//     وهكذا...
+// ---------------------------------------------------------------
+let currentTrack = 0;
+
+// ---------------------------------------------------------------
+// 3️⃣  هل الموسيقى تشتغل أوتوماتيك لما يدخل الموقع؟
+//     true  = تشتغل أوتوماتيك (المتصفح أحياناً بيمنع ده)
+//     false = لأ، يضغط play بنفسه
+// ---------------------------------------------------------------
+const AUTOPLAY = true;
+
+let isPlaying = false;
 
 audio.addEventListener('timeupdate', () => {
   if (audio.duration) {
@@ -1010,7 +1313,192 @@ function seekAudio(e) {
   audio.currentTime = ratio * audio.duration;
 }
 
-// ===== GIFT =====
+// ===== BASKETBALL GAME =====
+
+(function(){
+  const BK_TOTAL = 5;
+  let bkScore=0, bkAtt=0, bkBusy=false, bkDead=false;
+  let bkAx=50, bkDir=1, bkSpd=0.6;
+  let bkRaf;
+ 
+  const bkDotsEl = document.getElementById('bk-dots');
+  for(let i=0;i<BK_TOTAL;i++){
+    const d=document.createElement('div');
+    d.className='bk-dot'; d.id='bkd'+i;
+    bkDotsEl.appendChild(d);
+  }
+ 
+  const bkCourt = document.getElementById('bk-court');
+  const bkBallEl= document.getElementById('bk-ball');
+  const bkHoopEl= document.getElementById('bk-hoop');
+  const bkNetEl = document.getElementById('bk-net');
+  const bkArrowEl=document.getElementById('bk-arrow');
+  const bkPbar  = document.getElementById('bk-pbar');
+  const bkBtn   = document.getElementById('bk-btn');
+  const bkHint  = document.getElementById('bk-hint');
+ 
+  function bkLoop(){
+    if(!bkDead && !bkBusy){
+      bkAx += bkDir*bkSpd;
+      if(bkAx>=92){bkAx=92;bkDir=-1;}
+      if(bkAx<=8) {bkAx=8; bkDir=1;}
+      bkArrowEl.style.left = bkAx+'%';
+      const dist = Math.abs(bkAx-50);
+      bkPbar.style.height = Math.max(0,(1-dist/42)*100)+'%';
+    }
+    bkRaf=requestAnimationFrame(bkLoop);
+  }
+  bkRaf=requestAnimationFrame(bkLoop);
+ 
+  bkBtn.addEventListener('click', bkShoot);
+  bkBtn.addEventListener('touchstart', e=>{e.preventDefault();bkShoot();},{passive:false});
+ 
+  function bkShoot(){
+    if(bkBusy||bkDead) return;
+    bkBusy=true;
+    bkHint.style.opacity='0';
+    bkBtn.classList.remove('bk-pulse');
+ 
+    const dist=Math.abs(bkAx-50);
+    const ok = dist<18;
+    const close = dist<28;
+ 
+    bkAtt++;
+    document.getElementById('bk-aleft').textContent = BK_TOTAL-bkAtt;
+    document.getElementById('bkd'+(bkAtt-1)).classList.add(ok?'ok':'no');
+    bkSpd = 0.6 + bkAtt*0.08;
+ 
+    bkLaunchBall(bkAx, ok, close);
+  }
+ 
+  function bkLaunchBall(fromX, ok, close){
+    const cr = bkCourt.getBoundingClientRect();
+    const hr = bkHoopEl.getBoundingClientRect();
+ 
+    const sx = cr.width*0.5;
+    const sy = cr.height*0.80;
+    const tx = hr.left-cr.left + hr.width/2;
+    const ty = hr.top -cr.top  + hr.height/2;
+ 
+    const scatter=(fromX-50)*1.9;
+    const lx = ok ? tx+(Math.random()*8-4) : tx+scatter+(Math.random()*18-9);
+    const ly = ok ? ty-4 : ty+(close?-8:28);
+ 
+    bkBallEl.style.position='absolute';
+    bkBallEl.style.left=sx+'px';
+    bkBallEl.style.top=sy+'px';
+    bkBallEl.style.bottom='auto';
+    bkBallEl.style.transform='translate(-50%,-50%)';
+ 
+    const dur=580;
+    const t0=performance.now();
+    const apexY=Math.min(sy,ly)-115;
+ 
+    function frame(now){
+      const p=Math.min((now-t0)/dur,1);
+      const bx=(1-p)*(1-p)*sx+2*(1-p)*p*((sx+lx)/2)+p*p*lx;
+      const by=(1-p)*(1-p)*sy+2*(1-p)*p*apexY+p*p*ly;
+      bkBallEl.style.left=bx+'px';
+      bkBallEl.style.top=by+'px';
+      bkBallEl.style.transform=`translate(-50%,-50%) rotate(${p*340*(ok?1:1.6)}deg)`;
+      if(p<1){requestAnimationFrame(frame);return;}
+      ok ? bkOnScore() : bkOnMiss();
+    }
+    requestAnimationFrame(frame);
+  }
+ 
+
+  function bkOnScore(){
+    bkScore++;
+    document.getElementById('bk-snum').textContent=bkScore;
+    bkNetEl.classList.add('bk-net-go');
+    setTimeout(()=>bkNetEl.classList.remove('bk-net-go'),420);
+    bkFloat('دخلت! 🔥',50,44,'#ff8c00');
+    bkConf(9);
+    bkNext();
+  }
+  function bkOnMiss(){
+    bkCourt.classList.add('bk-shk');
+    setTimeout(()=>bkCourt.classList.remove('bk-shk'),360);
+    bkFloat('مدخلتش 😂',50,44,'#ff4444');
+    bkNext();
+  }
+  function bkNext(){
+    setTimeout(()=>{
+      bkResetBall();
+      bkBusy=false;
+      if(bkAtt>=BK_TOTAL) setTimeout(bkShowResult,500);
+      else bkBtn.classList.add('bk-pulse');
+    },480);
+  }
+  function bkResetBall(){
+    bkBallEl.style.position='absolute';
+    bkBallEl.style.left='50%';
+    bkBallEl.style.top='auto';
+    bkBallEl.style.bottom='20%';
+    bkBallEl.style.transform='translateX(-50%)';
+    bkBallEl.style.filter='';
+  }
+
+  function bkShowResult(){
+    bkDead=true;
+    const ov=document.getElementById('bk-overlay');
+    const msgs=[
+      {e:'🏀',s:'صفر من ٥',m:'بردو بحبك🤍'},
+      {e:'🏀',s:'١ من ٥',m:'وعامله فيها لعيبه بس بحبك بردو 🤍'},
+      {e:'🏀',s:'٢ من ٥',m:'ده اخرك يعني ماشي يا عم بحبك بردو🤍'},
+      {e:'🏀',s:'٣ من ٥',m:'مش اوي انتِ يبقى اعلمك شوي بحبك يا لوماا 🤍'},
+      {e:'🔥',s:'٤ من ٥',m:'يا ولاااا جامد يا عم وبحبك على فكره🤍'},
+      {e:'🏆',s:'٥ من ٥ 🔥',m:'ايه ده ايه ده يا ولاااا يا جامد بحبك🤍'},
+    ];
+    const r=msgs[bkScore];
+    document.getElementById('bk-remoji').textContent=r.e;
+    document.getElementById('bk-rscore').textContent=r.s;
+    document.getElementById('bk-rmsg').textContent=r.m;
+    if(bkScore>=4) bkConf(30);
+    setTimeout(()=>ov.classList.add('on'),200);
+  }
+
+  window.bkReset = function(){
+    bkScore=0;bkAtt=0;bkBusy=false;bkDead=false;bkAx=50;bkDir=1;bkSpd=1.3;
+    document.getElementById('bk-snum').textContent='0';
+    document.getElementById('bk-aleft').textContent=BK_TOTAL;
+    for(let i=0;i<BK_TOTAL;i++) document.getElementById('bkd'+i).className='bk-dot';
+    document.getElementById('bk-overlay').classList.remove('on');
+    bkHint.style.opacity='1';
+    bkResetBall();
+    bkBtn.classList.add('bk-pulse');
+  };
+
+  function bkFloat(txt,xp,yp,color){
+    const el=document.createElement('div');
+    el.className='bk-ft'; el.textContent=txt; el.style.color=color;
+    el.style.left=xp+'%'; el.style.top=yp+'%';
+    bkCourt.appendChild(el);
+    setTimeout(()=>el.remove(),1200);
+  }
+
+  function bkConf(n){
+    const cols=['#ff6a00','#ffcc00','#ff3399','#00ccff','#fff','#ff8c42'];
+    for(let i=0;i<n;i++){
+      setTimeout(()=>{
+        const c=document.createElement('div');
+        c.className='bk-cf';
+        c.style.left=(15+Math.random()*70)+'%';
+        c.style.top='-8px';
+        c.style.width=(5+Math.random()*7)+'px';
+        c.style.height=(5+Math.random()*7)+'px';
+        c.style.background=cols[Math.floor(Math.random()*cols.length)];
+        c.style.borderRadius=Math.random()>0.5?'50%':'2px';
+        c.style.animationDuration=(1.2+Math.random()*1.5)+'s';
+        bkCourt.appendChild(c);
+        setTimeout(()=>c.remove(),3000);
+      },i*55);
+    }
+  }
+})();
+
+
 document.getElementById('giftBox').onclick = function() {
   this.innerHTML = '💖';
   this.style.transform = 'scale(1.3) rotate(10deg)';
