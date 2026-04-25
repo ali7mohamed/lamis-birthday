@@ -1090,10 +1090,10 @@ function updateTimer(id, startDate) {
     <div class="timer-unit"><span class="timer-number">${String(secs).padStart(2,'0')}</span><span class="timer-text">ثانية</span></div>`;
 }
 function startTimers() {
-  updateTimer('timer1','2025-11-15T00:00:00');
+  updateTimer('timer1','2025-9-15T00:00:00');
   updateTimer('timer2','2026-03-07T00:00:00');
   setInterval(() => {
-    updateTimer('timer1','2025-11-15T00:00:00');
+    updateTimer('timer1','2025-9-15T00:00:00');
     updateTimer('timer2','2026-03-07T00:00:00');
   }, 1000);
 }
